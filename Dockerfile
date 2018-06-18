@@ -84,8 +84,10 @@ RUN rm -rf build/ && \
     make install && \
     ldconfig && \
     cd .. && \
-    python setup.py build && \
-    python setup.py install && \
+    python2 setup.py build && \
+    python2 setup.py install && \
+    python3 setup.py build && \
+    python3 setup.py install && \
     rm -rf ./build/
 
 WORKDIR /workspace
