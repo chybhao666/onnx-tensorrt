@@ -23,10 +23,10 @@
 #include "builtin_op_importers.hpp"
 #include "onnx2trt_utils.hpp"
 #include "plugin.hpp"
-#include "FancyActivation.hpp"
-#include "ResizeNearest.hpp"
-#include "Split.hpp"
-#include "InstanceNormalization.hpp"
+#include "custom_plugins/FancyActivation.hpp"
+#include "custom_plugins/ResizeNearest.hpp"
+#include "custom_plugins/Split.hpp"
+#include "custom_plugins/InstanceNormalization.hpp"
 
 namespace onnx2trt {
 

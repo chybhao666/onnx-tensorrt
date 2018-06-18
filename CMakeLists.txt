@@ -49,14 +49,14 @@ set(ONNX2TRT_PATCH 0)
 # Build configurations, global to all projects
 #--------------------------------------------------
 
-set(PLUGIN_SOURCE_DIR plugins)
+set(PLUGIN_SOURCE_DIR custom_plugins)
 
 set(PLUGIN_SOURCES
   ${PLUGIN_SOURCE_DIR}/FancyActivation.cu
   ${PLUGIN_SOURCE_DIR}/ResizeNearest.cu
   ${PLUGIN_SOURCE_DIR}/Split.cu
   ${PLUGIN_SOURCE_DIR}/InstanceNormalization.cpp
-  ${PLUGIN_SOURCE_DIR}/plugin.cpp
+  plugin.cpp
   )
 
 set(IMPORTER_SOURCES
@@ -171,9 +171,9 @@ if(NOT "${CUDA_NVCC_FLAGS}" MATCHES "-std=c\\+\\+11" )
   list(APPEND CUDA_NVCC_FLAGS -std=c++11)
 endif()
 list(APPEND CUDA_NVCC_FLAGS "-Xcompiler -fPIC --expt-extended-lambda")
-CUDA_INCLUDE_DIRECTORIES(${CUDNN_INCLUDE_DIR} ${TENSORRT_INCLUDE_DIR})
-CUDA_ADD_LIBRARY(nvonnxparser_plugin STATIC ${PLUGIN_SOURCES})
-target_include_directories(nvonnxparser_plugin PUBLIC ${CUDA_INCLUDE_DIRS} ${ONNX_INCLUDE_DIRS} ${TENSORRT_INCLUDE_DIR} ${CUDNN_INCLUDE_DIR})
+CUDA_INCLUDE_DIRECTORIES(${CUDNN_INCLUDE_DIR} ${TENSORRT_INCLUDE_DIR} ${ONNX2TRT_ROOT})
+CUDA_ADD_LIBRARY(nvonnxparser_plugin STATIC ${PLUGIN_SOURCES} ${ONNX2TRT_ROOT})
+target_include_directories(nvonnxparser_plugin PUBLIC ${CUDA_INCLUDE_DIRS} ${ONNX_INCLUDE_DIRS} ${TENSORRT_INCLUDE_DIR} ${CUDNN_INCLUDE_DIR} ${ONNX2TRT_ROOT}) 
 target_link_libraries(nvonnxparser_plugin ${TENSORRT_LIBRARY})
 
 # --------------------------------
