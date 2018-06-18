@@ -79,8 +79,11 @@ Build the Python wrappers and modules by running:
 
 Build the onnx_tensorrt Docker image by running:
 
-    cp /path/to/TensorRT-3.0.*.tar.gz .
-    docker build -t onnx_tensorrt .
+    cp /path/to/TensorRT-4.0.*.tar.gz .
+    [sudo] docker build [--network=host] -t onnx_tensorrt .
+
+Create and run a Docker container using above image with:
+    [sudo] nvidia-docker run [--net=host] -v $PWD:/shared onnx_tensorrt /bin/bash
 
 ### Tests
 

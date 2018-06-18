@@ -47,7 +47,7 @@ RUN cd /usr/local/src && \
 
 # Install TensorRT
 WORKDIR /usr/local/src
-ENV TENSORRT_VERSION 3.0
+ENV TENSORRT_VERSION 4.0
 COPY TensorRT-${TENSORRT_VERSION}.*.tar.gz .
 RUN tar -xvf TensorRT-${TENSORRT_VERSION}.*.tar.gz && \
     cd TensorRT-${TENSORRT_VERSION}.* && \
@@ -65,6 +65,10 @@ RUN tar -xvf TensorRT-${TENSORRT_VERSION}.*.tar.gz && \
     pip3 install uff/uff-*-py2.py3-none-any.whl && \
     cd ../ && \
     rm -rf TensorRT-${TENSORRT_VERSION}.*
+
+# TensorFlow
+
+RUN pip2 install tensorflow-gpu==1.6 && pip3 install tensorflow-gpu==1.6
 
 # Build the library
 
