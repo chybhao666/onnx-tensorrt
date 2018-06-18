@@ -49,12 +49,14 @@ set(ONNX2TRT_PATCH 0)
 # Build configurations, global to all projects
 #--------------------------------------------------
 
+set(PLUGIN_SOURCE_DIR plugins)
+
 set(PLUGIN_SOURCES
-  FancyActivation.cu
-  ResizeNearest.cu
-  Split.cu
-  InstanceNormalization.cpp
-  plugin.cpp
+  ${PLUGIN_SOURCE_DIR}/FancyActivation.cu
+  ${PLUGIN_SOURCE_DIR}/ResizeNearest.cu
+  ${PLUGIN_SOURCE_DIR}/Split.cu
+  ${PLUGIN_SOURCE_DIR}/InstanceNormalization.cpp
+  ${PLUGIN_SOURCE_DIR}/plugin.cpp
   )
 
 set(IMPORTER_SOURCES

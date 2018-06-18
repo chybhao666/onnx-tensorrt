@@ -84,7 +84,7 @@ Build the onnx_tensorrt Docker image by running:
 
 Create and run a Docker container using above image with:
 
-    [sudo] nvidia-docker run [--net=host] -v $PWD:/shared onnx_tensorrt /bin/bash
+    [sudo] nvidia-docker run -it [--net=host] -v $PWD:/shared onnx_tensorrt /bin/bash
 
 ### Tests
 
