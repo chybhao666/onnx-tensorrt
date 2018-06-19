@@ -51,7 +51,7 @@ libnvonnxparser_runtime.so, which has a C++ API declared in this header:
 ### Dependencies
 
  - [Protobuf](https://github.com/google/protobuf/releases)
- - [TensorRT 3+](https://developer.nvidia.com/tensorrt)
+ - [TensorRT 4+](https://developer.nvidia.com/tensorrt)
 
 ### Download the code
 Clone the code from GitHub. 
@@ -80,11 +80,21 @@ Build the Python wrappers and modules by running:
 Build the onnx_tensorrt Docker image by running:
 
     cp /path/to/TensorRT-4.0.*.tar.gz .
-    [sudo] docker build [--network=host] -t onnx_tensorrt .
 
-Create and run a Docker container using above image with:
+For the Python 2 version, run: 
+    
+    [sudo] docker build [--network=host] -t onnx_tensorrt_py2 -f Dockerfile.python2 .
 
-    [sudo] nvidia-docker run -it [--net=host] -v $PWD:/shared onnx_tensorrt /bin/bash
+For the Python 3 version, run:
+
+    [sudo] docker build [--network=host] -t onnx_tensorrt_py3 -f Dockerfile.python3 .
+
+
+
+Create a Docker container using above images for the Python 2 or Python 3 version:
+
+    [sudo] nvidia-docker run -it [--net=host] -v $PWD:/shared onnx_tensorrt_[py2 or py3] /bin/bash
+
 
 ### Tests
 
