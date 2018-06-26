@@ -11,6 +11,7 @@ The TensorRT backend for ONNX can be used in Python as follows:
 ```python
 import onnx
 import onnx_tensorrt.backend as backend
+import pycuda.autoinit
 import numpy as np
 
 model = onnx.load("/path/to/model.onnx")
