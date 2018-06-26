@@ -98,6 +98,7 @@ Run a Docker container using above images for the Python 2 or Python 3 version:
     [sudo] nvidia-docker run -it [--net=host] -v $PWD:/shared onnx_tensorrt_[py2 or py3] /bin/bash
 
 To run the Jupyter explaining how to use the custom layer interface, run the command below (selecting the Python 2 or Python 3 version) and open link shown in the console with your browser:
+    
     [sudo] nvidia-docker run -it --net=host -v $PWD/samples:/workspace/samples onnx_tensorrt_[py2 or py3] jupyter notebook --allow-root /workspace/samples/onnx_custom_plugin.ipynb
 
 ### Tests
