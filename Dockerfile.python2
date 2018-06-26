@@ -35,14 +35,11 @@ RUN cd /usr/local/src && \
     pip2 install pybind11 && \
     pip2 install protobuf && \
     pip2 install numpy && \
+    pip2 install matplotlib && \
     python2 setup.py build && \
     python2 setup.py install && \
     cd ../ && \
     rm -rf onnx/
-
-# TensorFlow
-
-RUN pip2 install tensorflow-gpu==1.6
 
 # Install TensorRT
 WORKDIR /usr/local/src
@@ -57,9 +54,12 @@ RUN tar -xvf TensorRT-${TENSORRT_VERSION}.*.tar.gz && \
     mkdir /usr/share/doc/tensorrt && \
     cp -r doc/* /usr/share/doc/tensorrt/ && \
     mkdir /usr/src/tensorrt && \
-    cp -r samples /usr/src/tensorrt/  && \
+    cp -r targets/x86_64-linux-gnu/samples /usr/src/tensorrt/  && \
+    cp -r data /usr/src/tensorrt/ && \
+    pip2 install pycuda==2017.1.1 && \
     pip2 install python/tensorrt-${TENSORRT_VERSION}.*-cp27-cp27mu-linux_x86_64.whl && \
     pip2 install uff/uff-*-py2.py3-none-any.whl && \
+    pip2 install graphsurgeon/graphsurgeon-*-py2.py3-none-any.whl && \
     cd ../ && \
     rm -rf TensorRT-${TENSORRT_VERSION}.*
 
@@ -79,7 +79,18 @@ RUN rm -rf build/ && \
     cd .. && \
     python2 setup.py build && \
     python2 setup.py install && \
-    rm -rf ./build/
+    rm -rf ./build/ && \
+    rm -rf TensorRT-${TENSORRT_VERSION}.*
+
+# Install PyTorch if the pip wheel file is present
+
+RUN if [ -f torch-*-cp27-cp27mu-linux_x86_64.whl ]; then \
+	pip2 install torch-*-cp27-cp27mu-linux_x86_64.whl && \
+	pip2 install torchvision && \
+	rm -rf torch-*-cp27-cp27mu-linux_x86_64.whl; \
+	fi
+
+RUN pip2 install jupyter
 
 WORKDIR /workspace
 

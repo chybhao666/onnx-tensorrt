@@ -23,5 +23,11 @@ __pycache__/
 # Build
 build
 
-# To be downloaded from NVIDIA Developer Zone
+# TensorRT, to be downloaded from NVIDIA Developer Zone
 TensorRT-*.tar.gz
+
+# Wheel files, can be added optionally (e.g. for installing PyTorch)
+*.whl
+
+# Artefacts from the sample code
+*.onnx

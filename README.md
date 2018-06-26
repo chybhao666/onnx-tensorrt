@@ -75,11 +75,13 @@ Build the Python wrappers and modules by running:
     python setup.py build
     sudo python setup.py install
 
-### Docker image
+### Docker image (tested)
 
-Build the onnx_tensorrt Docker image by running:
+Build the onnx_tensorrt Docker by first copying TensorRT to the cloned `onnx-tensorrt` directory, and optionally downloading the PyTorch wheel for the respective Python version (the Dockerfile will install PyTorch if the wheel is present):
 
     cp /path/to/TensorRT-4.0.*.tar.gz .
+    wget http://download.pytorch.org/whl/cu90/torch-0.4.0-cp27-cp27mu-linux_x86_64.whl (Optional for Python 2 version, see below)
+    wget http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x86_64.whl (Optional for Python 3, see below)
 
 For the Python 2 version, run: 
     
@@ -90,11 +92,12 @@ For the Python 3 version, run:
     [sudo] docker build [--network=host] -t onnx_tensorrt_py3 -f Dockerfile.python3 .
 
 
-
-Create a Docker container using above images for the Python 2 or Python 3 version:
+Run a Docker container using above images for the Python 2 or Python 3 version:
 
     [sudo] nvidia-docker run -it [--net=host] -v $PWD:/shared onnx_tensorrt_[py2 or py3] /bin/bash
 
+To run the Jupyter explaining how to use the custom layer interface, run the command below (selecting the Python 2 or Python 3 version) and open link shown in the console with your browser:
+    [sudo] nvidia-docker run -it --net=host -v $PWD/samples:/workspace/samples onnx_tensorrt_[py2 or py3] jupyter notebook --allow-root /workspace/samples/onnx_custom_plugin.ipynb
 
 ### Tests
 
