@@ -1126,7 +1126,7 @@ DEFINE_BUILTIN_OP_IMPORTER(Upsample) {
   }
   auto scale = {height_scale, width_scale};
   auto mode = attrs.get<std::string>("mode", "nearest");
-  ASSERT(mode == "nearest", ErrorCode::kUNSUPPORTED_NODE);
+  ASSERT(mode == "nearest" || mode == "NEAREST", ErrorCode::kUNSUPPORTED_NODE);
   RETURN_FIRST_OUTPUT(ctx->addPlugin(new ResizeNearestPlugin(scale),
                                      {&inputs.at(0).tensor()}));
 }
